@@ -26,7 +26,7 @@ class AlfredDB(object):
             return response
 
     def create_engine(self, app):
-        database_uri = app.config.get('ALFREDDB_DATABASE_URI')
+        database_uri = app.config.get('DATABASE_URI')
         return create_engine(database_uri)
 
     @property
