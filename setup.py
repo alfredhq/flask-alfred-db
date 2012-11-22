@@ -12,6 +12,6 @@ setup(
     py_modules=['flask_alfred_db'],
     install_requires=[
         'Flask',
-        'alfred-db',
+        'SQLAlchemy',
     ],
 )

@@ -1,15 +1,19 @@
-from alfred_db import Session
 from flask import current_app, _app_ctx_stack
 
 from sqlalchemy import create_engine
-from sqlalchemy.orm import scoped_session
+from sqlalchemy.orm import scoped_session, sessionmaker
+
+
+Session = sessionmaker(autocommit=False, autoflush=False)
 
 
 class AlfredDB(object):
 
-    def __init__(self, app=None):
+    def __init__(self, app=None, session_factory=None):
+        if session_factory is None:
+            session_factory = Session
         self.session_class = scoped_session(
-            session_factory=Session,
+            session_factory=session_factory,
             scopefunc=_app_ctx_stack.__ident_func__,
         )
         if app is not None:
